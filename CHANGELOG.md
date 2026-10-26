@@ -18,3 +18,6 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 - Migration initiale (`migrations/0001_init.sql`), activable avec `RUN_MIGRATIONS`.
 - `Dockerfile`, `compose.yaml` de développement et intégration continue GitHub Actions.
 - `README.md` avec un exemple de `compose.yaml` de production.
+
+[Unreleased]: https://github.com/Livda/rusted-recipes/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/Livda/rusted-recipes/releases/tag/v1.0.0
