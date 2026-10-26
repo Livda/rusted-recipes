@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Supprimer une recette{% endblock %}
+
+{% block content %}
+<h1>Supprimer la recette ?</h1>
+<form class="confirm" method="post" action="{{ self.action() }}">
+  <input type="hidden" name="_csrf_token" value="{{ ctx.csrf }}">
+  <p>Voulez-vous vraiment supprimer la recette <strong>{{ recipe.name }}</strong> ? Cette action est définitive.</p>
+  <div class="form-actions">
+    <button type="submit" data-variant="danger">Supprimer</button>
+    <a href="{{ ctx.recipes_url() }}">Annuler</a>
+  </div>
+</form>
+{% endblock %}

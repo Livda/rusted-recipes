@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}{% if id.is_some() %}Modifier une recette{% else %}Ajouter une recette{% endif %}{% endblock %}
+
+{% block content %}
+<h1>{% if id.is_some() %}Modifier une recette{% else %}Ajouter une recette{% endif %}</h1>
+
+{% if !errors.is_empty() %}
+<ul class="errors" role="alert">
+  {% for error in errors %}<li>{{ error }}</li>{% endfor %}
+</ul>
+{% endif %}
+
+<form method="post" action="{{ ctx.recipe_save_url() }}">
+  <input type="hidden" name="_csrf_token" value="{{ ctx.csrf }}">
+  {% if let Some(id) = id %}<input type="hidden" name="id" value="{{ id }}">{% endif %}
+
+  <label for="name">Nom</label>
+  <input type="text" id="name" name="name" value="{{ name }}" maxlength="255" required>
+
+  <fieldset>
+    <legend>Classement</legend>
+    <label for="season">Saison</label>
+    <select id="season" name="season">
+      {% for o in seasons %}<option value="{{ o.value }}"{% if o.selected %} selected{% endif %}>{{ o.label }}</option>{% endfor %}
+    </select>
+    <label for="diet">Régime</label>
+    <select id="diet" name="diet">
+      {% for o in diets %}<option value="{{ o.value }}"{% if o.selected %} selected{% endif %}>{{ o.label }}</option>{% endfor %}
+    </select>
+  </fieldset>
+
+  <label for="url">Lien</label>
+  <input type="url" id="url" name="url" value="{{ url }}" placeholder="https://…" required>
+
+  <label for="tags">Tags <small>(séparés par des virgules)</small></label>
+  <input type="text" id="tags" name="tags" value="{{ tags }}">
+
+  <label for="note">Note</label>
+  <textarea id="note" name="note" rows="4" maxlength="255">{{ note }}</textarea>
+
+  <div class="form-actions">
+    <button type="submit">Enregistrer</button>
+    <a href="{{ ctx.recipes_url() }}">Annuler</a>
+  </div>
+</form>
+{% endblock %}

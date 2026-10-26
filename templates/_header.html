@@ -1,0 +1,20 @@
+<header>
+  <a class="brand" href="{{ ctx.home_url() }}">Recipes eBook</a>
+  <details class="menu">
+    <summary aria-label="Menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </summary>
+    <nav aria-label="Navigation principale">
+      <a href="{{ ctx.recipes_url() }}"{% if ctx.active == "recipes" %} aria-current="page"{% endif %}>Recettes</a>
+      {% if ctx.logged_in() %}
+        <a href="{{ ctx.recipe_new_url() }}"{% if ctx.active == "recipe-form" %} aria-current="page"{% endif %}>Ajouter une recette</a>
+        <form method="post" action="{{ ctx.logout_url() }}">
+          <input type="hidden" name="_csrf_token" value="{{ ctx.csrf }}">
+          <button type="submit" data-variant="danger">Déconnexion</button>
+        </form>
+      {% else %}
+        <a class="button" href="{{ ctx.login_url() }}">Connexion</a>
+      {% endif %}
+    </nav>
+  </details>
+</header>

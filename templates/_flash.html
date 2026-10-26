@@ -1,0 +1,7 @@
+{% if !ctx.flashes.is_empty() %}
+<section class="flashes" aria-label="Messages">
+  {% for flash in ctx.flashes %}
+    <p class="flash" data-type="{{ flash.kind }}" role="status">{{ flash.message }}</p>
+  {% endfor %}
+</section>
+{% endif %}

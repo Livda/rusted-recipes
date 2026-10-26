@@ -1,0 +1,29 @@
+<nav class="pagination" aria-label="Pagination">
+  <ul>
+    <li>
+      {% if let Some(href) = pagination.previous %}
+        <a rel="prev" href="{{ href }}">« Précédentes</a>
+      {% else %}
+        <span aria-disabled="true">« Précédentes</span>
+      {% endif %}
+    </li>
+    {% for link in pagination.links %}
+    <li>
+      {% if link.current %}
+        <span aria-current="page">{{ link.label }}</span>
+      {% else if let Some(href) = link.href %}
+        <a href="{{ href }}">{{ link.label }}</a>
+      {% else %}
+        <span aria-disabled="true">{{ link.label }}</span>
+      {% endif %}
+    </li>
+    {% endfor %}
+    <li>
+      {% if let Some(href) = pagination.next %}
+        <a rel="next" href="{{ href }}">Suivantes »</a>
+      {% else %}
+        <span aria-disabled="true">Suivantes »</span>
+      {% endif %}
+    </li>
+  </ul>
+</nav>

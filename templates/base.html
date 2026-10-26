@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recipes eBook – {% block title %}{% endblock %}</title>
+  <link rel="icon" href="/static/favicon.ico">
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body{% if ctx.active == "home" %} data-page="home"{% endif %}>
+  {% if ctx.active != "home" %}
+    {% include "_header.html" %}
+  {% endif %}
+  <main>
+    {% include "_flash.html" %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

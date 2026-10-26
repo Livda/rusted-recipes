@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Liste des recettes{% endblock %}
+
+{% block content %}
+{% include "_search_bar.html" %}
+
+{% if recipes.is_empty() %}
+  <p class="empty">Aucune recette ne correspond à cette recherche.</p>
+{% else %}
+<section class="recipes" aria-label="Recettes">
+  {% for recipe in recipes %}
+  <article class="recipe-card">
+    <header>
+      <h2>{{ recipe.name }}</h2>
+      {% if ctx.logged_in() %}
+      <div class="actions">
+        <a class="icon-button" href="{{ self.edit_url(recipe) }}" aria-label="Modifier {{ recipe.name }}">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>
+        </a>
+        <a class="icon-button" data-variant="danger" href="{{ self.delete_url(recipe) }}" aria-label="Supprimer {{ recipe.name }}">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>
+        </a>
+      </div>
+      {% endif %}
+    </header>
+    {% if !recipe.tags.is_empty() %}
+    <ul class="tags">
+      {% for tag in recipe.tags %}<li class="tag">#{{ tag }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+    {% if let Some(note) = recipe.note %}
+      <p class="note">{{ note }}</p>
+    {% endif %}
+    <footer>
+      <a href="{{ recipe.url }}" target="_blank" rel="noopener noreferrer">Lien vers la recette</a>
+    </footer>
+  </article>
+  {% endfor %}
+</section>
+{% endif %}
+
+{% if let Some(pagination) = pagination %}
+  {% include "_pagination.html" %}
+{% endif %}
+{% endblock %}

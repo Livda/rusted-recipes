@@ -1,0 +1,19 @@
+<form class="search-bar" method="get" action="{{ ctx.recipes_url() }}" role="search">
+  <label for="search_season">Saison</label>
+  <select id="search_season" name="season">
+    {% for o in search_bar.seasons %}
+      <option value="{{ o.value }}"{% if o.selected %} selected{% endif %}>{{ o.label }}</option>
+    {% endfor %}
+  </select>
+  <label for="search_diet">Régime</label>
+  <select id="search_diet" name="diet">
+    {% for o in search_bar.diets %}
+      <option value="{{ o.value }}"{% if o.selected %} selected{% endif %}>{{ o.label }}</option>
+    {% endfor %}
+  </select>
+  <label for="search_search">Rechercher</label>
+  <input type="search" id="search_search" name="search" value="{{ search_bar.search }}" placeholder="Rechercher par nom ou tag…">
+  <button type="submit" aria-label="Rechercher">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+  </button>
+</form>

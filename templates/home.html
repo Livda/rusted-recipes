@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Chercher une recette{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <h1>Recipes eBook</h1>
+  {% include "_search_bar.html" %}
+  {% if ctx.logged_in() %}
+    <a class="round-button" href="{{ ctx.recipe_new_url() }}" aria-label="Ajouter une recette">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+    </a>
+  {% endif %}
+</section>
+{% endblock %}
